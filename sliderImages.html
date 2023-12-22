@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Images</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      .slider-viewport {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        height: auto;
+      }
+      .images-container {
+        display: flex;
+        height: auto;
+        width: 100%;
+        transition: all 0.4s ease-in-out;
+      }
+      .images-container img {
+        min-width: 100%;
+        height: 30%;
+      }
+
+      .btn {
+        background-color: #f1f1f1;
+        color: black;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+      .prev {
+        left: 10px;
+      }
+      .next {
+        right: 10px;
+      }
+      a {
+        text-decoration: none;
+        display: inline-block;
+        padding: 8px 16px;
+      }
+
+      a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="product-images">
+      <div class="slider-viewport">
+        <div class="images-container">
+          <img src="images/1.jpeg" alt="dahab1" class="slider-img" />
+          <img src="images/2.jpg" alt="dahab2" class="slider-img" />
+          <img src="images/3.jpeg" alt="dahab3" class="slider-img" />
+        </div>
+      </div>
+
+      <a href="#" class="btn prev" onclick="prev()">&#8249;</a>
+      <a href="#" class="btn next" onclick="next()">&#8250;</a>
+    </div>
+
+    <script>
+      const viewport = document.querySelector(".slider-viewport");
+      const container = document.querySelector(".images-container");
+      const images = container.querySelectorAll("img").length;
+      let index = 0;
+
+      const moveSlider = (index) => {
+        container.style.transform = `translateX(${-index * 100}%)`;
+      };
+
+      /*  setInterval(() => {
+        index = index < images - 1 ? index + 1 : 0;
+        moveSlider(index);
+      }, 2000);
+ */
+      const prev = document.querySelector(".prev");
+      const next = document.querySelector(".next");
+
+      prev.addEventListener("click", () => {
+        index = index > 0 ? index - 1 : images - 1;
+        moveSlider(index);
+      });
+
+      next.addEventListener("click", () => {
+        index = index < images - 1 ? index + 1 : 0;
+        moveSlider(index);
+      });
+    </script>
+  </body>
+</html>
